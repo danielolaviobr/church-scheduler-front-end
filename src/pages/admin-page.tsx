@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../styles/pages/admin-page.css";
@@ -17,40 +17,45 @@ function AdminPage() {
   const [users, setUsers] = useState<Person[]>([]);
   const [nextEvent, setNextEvent] = useState<string>("");
 
-  async function getPersons() {
+  const getPersons = useCallback(async () => {
     const re = /\//gi;
     const response = await Axios.get(
       `http://localhost:3003/celula/${nextEvent.replace(re, "-")}`
     );
     setUsers(response.data);
-  }
+  }, [nextEvent]);
 
-  async function deletePerson(id: number) {
-    await Axios.delete(`http://localhost:3003/celula/${id}`);
-    getPersons();
-  }
+  const deletePerson = useCallback(
+    async (id: number) => {
+      await Axios.delete(`http://localhost:3003/celula/${id}`);
+      getPersons();
+    },
+    [getPersons]
+  );
 
-  const scheduledPersons = users.map((person) => (
-    <div className="persons">
-      <li key={person.id}>{person.name}</li>
-      <img
-        className="delete-icon"
-        src={DeleteIcon}
-        alt="Deletar"
-        onClick={() => deletePerson(person.id)}
-      />
-    </div>
-  ));
+  const scheduledPersons = useMemo(() => {
+    return users.map((person) => (
+      <div key={person.id} className="persons">
+        <li>{person.name}</li>
+        <img
+          className="delete-icon"
+          src={DeleteIcon}
+          alt="Deletar"
+          onClick={() => deletePerson(person.id)}
+        />
+      </div>
+    ));
+  }, [users, deletePerson]);
 
-  async function getDate() {
+  const getDate = useCallback(async () => {
     const response = await Axios.get("http://localhost:3003/date/celula");
     setNextEvent(response.data.date);
-  }
+  }, []);
 
   useEffect(() => {
     getDate();
     getPersons();
-  }, []);
+  }, [getDate, getPersons]);
 
   return (
     <div id="admin-page">
