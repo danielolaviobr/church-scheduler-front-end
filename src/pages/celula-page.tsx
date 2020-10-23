@@ -27,6 +27,7 @@ function CelulaPage() {
   async function submitForm() {
     const response = await Axios.post("http://localhost:3003/celula", {
       name: fullName,
+      date: nextEvent,
     }).catch(() => {
       return { status: 400 };
     });
