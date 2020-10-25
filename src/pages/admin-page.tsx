@@ -1,9 +1,9 @@
-import Axios from "axios";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "../styles/pages/admin-page.css";
 
+import api from "../services/api";
 import DeleteIcon from "../images/delete.svg";
 import smallLogo from "../images/logo-small.svg";
 
@@ -19,15 +19,13 @@ function AdminPage() {
 
   const getPersons = useCallback(async () => {
     const re = /\//gi;
-    const response = await Axios.get(
-      `http://localhost:3003/celula/${nextEvent.replace(re, "-")}`
-    );
+    const response = await api.get(`celula/${nextEvent.replace(re, "-")}`);
     setUsers(response.data);
   }, [nextEvent]);
 
   const deletePerson = useCallback(
     async (id: number) => {
-      await Axios.delete(`http://localhost:3003/celula/${id}`);
+      await api.delete(`celula/${id}`);
       getPersons();
     },
     [getPersons]
@@ -48,7 +46,7 @@ function AdminPage() {
   }, [users, deletePerson]);
 
   const getDate = useCallback(async () => {
-    const response = await Axios.get("http://localhost:3003/date/celula");
+    const response = await api.get("date/celula");
     setNextEvent(response.data.date);
   }, []);
 
