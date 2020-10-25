@@ -4,7 +4,7 @@ import "../styles/pages/celula-page.css";
 import { Alert } from "@material-ui/lab";
 
 import smallLogo from "../images/logo-small.svg";
-import Axios from "axios";
+import api from "../services/api";
 
 function CelulaPage() {
   interface alertDataType {
@@ -24,32 +24,34 @@ function CelulaPage() {
     undefined
   );
 
-  async function submitForm() {
-    const response = await Axios.post("http://localhost:3003/celula", {
-      name: fullName,
-      date: nextEvent,
-    }).catch(() => {
-      return { status: 400 };
-    });
+  function submitForm() {
+    api
+      .post("celula", {
+        name: fullName,
+        date: nextEvent,
+      })
+      .catch((error) => {
+        console.log(error);
+        setAlertData({
+          type: "error",
+          message: "Ocorreu um erro ao realizar a inscrição",
+          visible: true,
+        });
+      })
+      .then((response) => {
+        response &&
+          setAlertData({
+            type: "success",
+            message: "Inscrição realizada com sucesso",
+            visible: true,
+          });
+      });
 
-    if (response.status === 201) {
-      setAlertData({
-        type: "success",
-        message: "Inscrição realizada com sucesso",
-        visible: true,
-      });
-    } else {
-      setAlertData({
-        type: "error",
-        message: "Ocorreu um erro ao realizar a inscrição",
-        visible: true,
-      });
-    }
     setFullName("");
   }
 
   async function getDate() {
-    const response = await Axios.get("http://localhost:3003/date/celula");
+    const response = await api.get("date/celula");
     setNextEvent(response.data.date);
   }
 
