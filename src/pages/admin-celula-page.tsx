@@ -13,7 +13,7 @@ interface Person {
   scheduled_to: string;
 }
 
-function AdminPage() {
+function AdminCelulaPage() {
   const [users, setUsers] = useState<Person[]>([]);
   const [nextEvent, setNextEvent] = useState<string>("");
 
@@ -70,4 +70,4 @@ function AdminPage() {
   );
 }
 
-export default AdminPage;
+export default AdminCelulaPage;
