@@ -52,7 +52,7 @@
 
   width: 200px;
   height: 70px;
-  background: #cb6024;
+  background: #279ece;
   margin-right: 40px;
 
   color: #fff;
@@ -70,5 +70,5 @@
 }
 
 #landing-page .content-wrapper footer .redirect-button:hover {
-  background: #e57637;
+  background: #2db1e6;
 }

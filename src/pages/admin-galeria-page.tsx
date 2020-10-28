@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 
-import "../styles/pages/admin-celula-page.css";
+import "../styles/pages/admin-galeria-page.css";
 
 import api from "../services/api";
 import DeleteIcon from "../images/delete.svg";
@@ -13,19 +13,19 @@ interface Person {
   scheduled_to: string;
 }
 
-function AdminCelulaPage() {
+function AdminGaleriaPage() {
   const [users, setUsers] = useState<Person[]>([]);
   const [nextEvent, setNextEvent] = useState<string>("");
 
   const getPersons = useCallback(async () => {
     const re = /\//gi;
-    const response = await api.get(`celula/${nextEvent.replace(re, "-")}`);
+    const response = await api.get(`galeria/${nextEvent.replace(re, "-")}`);
     setUsers(response.data);
   }, [nextEvent]);
 
   const deletePerson = useCallback(
     async (id: number) => {
-      await api.delete(`celula/${id}`);
+      await api.delete(`galeria/${id}`);
       getPersons();
     },
     [getPersons]
@@ -46,17 +46,20 @@ function AdminCelulaPage() {
   }, [users, deletePerson]);
 
   const getDate = useCallback(async () => {
-    const response = await api.get("date/celula");
+    const response = await api.get("galeria_date");
     setNextEvent(response.data.date);
   }, []);
 
   useEffect(() => {
     getDate();
-    getPersons();
-  }, [getDate, getPersons]);
+    console.log("got date");
+    if (nextEvent !== "") {
+      getPersons();
+    }
+  }, [getDate, getPersons, nextEvent]);
 
   return (
-    <div id="admin-celula-page">
+    <div id="admin-galeria-page">
       <Link to="/" className="logo">
         <img src={smallLogo} alt="Início" />
       </Link>
@@ -70,4 +73,4 @@ function AdminCelulaPage() {
   );
 }
 
-export default AdminCelulaPage;
+export default AdminGaleriaPage;

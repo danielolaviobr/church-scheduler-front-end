@@ -1,4 +1,4 @@
-#celula-page {
+#galeria-page {
   width: 100vw;
   height: 100vh;
 
@@ -8,14 +8,14 @@
   justify-content: center;
 }
 
-#celula-page .logo {
+#galeria-page .logo {
   position: absolute;
 
   left: 20px;
   top: 20px;
 }
 
-#celula-page main {
+#galeria-page main {
   background: #fff;
 
   height: 600px;
@@ -32,14 +32,14 @@
   justify-content: space-evenly;
 }
 
-#celula-page main .header {
+#galeria-page main .header {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-#celula-page main input {
+#galeria-page main input {
   height: 40px;
   width: 340px;
   padding: 10px;
@@ -53,7 +53,7 @@
   border-radius: 5px;
 }
 
-#celula-page main .confirm {
+#galeria-page main .confirm {
   height: 40px;
   width: 340px;
   padding: 10px;
@@ -73,11 +73,11 @@
   transition: background-color 0.2s;
 }
 
-#celula-page main .confirm:hover {
+#galeria-page main .confirm:hover {
   background: #2db1e6;
 }
 
-#celula-page main .cancel {
+#galeria-page main .cancel {
   height: 40px;
   padding: 10px;
 
