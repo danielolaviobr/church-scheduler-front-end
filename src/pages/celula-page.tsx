@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../styles/pages/celula-page.css";
 import { Alert } from "@material-ui/lab";
 
-import smallLogo from "../images/logo-small.svg";
 import api from "../services/api";
 
 function CelulaPage() {
@@ -30,14 +29,6 @@ function CelulaPage() {
         name: fullName,
         date: nextEvent,
       })
-      .catch((error) => {
-        console.log(error);
-        setAlertData({
-          type: "error",
-          message: "Ocorreu um erro ao realizar a inscrição",
-          visible: true,
-        });
-      })
       .then((response) => {
         response &&
           setAlertData({
@@ -45,6 +36,17 @@ function CelulaPage() {
             message: "Inscrição realizada com sucesso",
             visible: true,
           });
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setAlertData({
+          type: "error",
+          message:
+            error.response.status === 400
+              ? "Ocorreu um erro ao realizar a inscrição"
+              : "Lotação máxima alcançada",
+          visible: true,
+        });
       });
 
     setFullName("");
@@ -66,9 +68,9 @@ function CelulaPage() {
 
   return (
     <div id="celula-page">
-      <Link to="/" className="logo">
-        <img src={smallLogo} alt="Início" />
-      </Link>
+      {/* <Link to="/" className="logo">
+        <img src={smallLogo} alt="Início" height={150} />
+      </Link> */}
       <main>
         {displayAlert}
         <div className="header">

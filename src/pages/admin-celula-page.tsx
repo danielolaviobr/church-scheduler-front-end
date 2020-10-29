@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 
 import "../styles/pages/admin-celula-page.css";
 
 import api from "../services/api";
 import DeleteIcon from "../images/delete.svg";
-import smallLogo from "../images/logo-small.svg";
 
 interface Person {
   id: number;
@@ -57,9 +55,9 @@ function AdminCelulaPage() {
 
   return (
     <div id="admin-celula-page">
-      <Link to="/" className="logo">
+      {/* <Link to="/" className="logo">
         <img src={smallLogo} alt="Início" />
-      </Link>
+      </Link> */}
       <div className="content-wrapper">
         <header>Cadastrados {nextEvent}</header>
         <div className="srollable-list">

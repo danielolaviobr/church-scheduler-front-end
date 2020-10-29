@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 
 import "../styles/pages/admin-galeria-page.css";
 
 import api from "../services/api";
 import DeleteIcon from "../images/delete.svg";
-import smallLogo from "../images/logo-small.svg";
 
 interface Person {
   id: number;
@@ -60,9 +58,9 @@ function AdminGaleriaPage() {
 
   return (
     <div id="admin-galeria-page">
-      <Link to="/" className="logo">
-        <img src={smallLogo} alt="Início" />
-      </Link>
+      {/* <Link to="/" className="logo">
+        <img src={smallLogo} alt="Início" height={150} />
+      </Link> */}
       <div className="content-wrapper">
         <header>Cadastrados {nextEvent}</header>
         <div className="srollable-list">
