@@ -39,7 +39,6 @@ function GaleriaPage() {
           });
       })
       .catch((error) => {
-        console.log(error.response);
         setAlertData({
           type: "error",
           message:
@@ -55,7 +54,6 @@ function GaleriaPage() {
 
   async function getDate() {
     const response = await api.get("galeria_date");
-    console.log(response);
     setNextEvent(response.data.date);
   }
 

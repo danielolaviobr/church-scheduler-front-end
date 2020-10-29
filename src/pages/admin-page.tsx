@@ -51,7 +51,6 @@ function AdminPage() {
       setCelulaCapacityServer(response.data.max_capacity);
     });
     api.get("/max_capacity/galeria").then((response) => {
-      console.log(response);
       setGaleriaCapacityServer(response.data.max_capacity);
     });
     api.get("/galeria_date").then((response) => {

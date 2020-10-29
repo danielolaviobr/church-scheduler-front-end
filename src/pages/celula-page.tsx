@@ -38,7 +38,6 @@ function CelulaPage() {
           });
       })
       .catch((error) => {
-        console.log(error.response);
         setAlertData({
           type: "error",
           message:

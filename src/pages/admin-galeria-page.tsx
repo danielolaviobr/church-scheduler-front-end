@@ -50,7 +50,6 @@ function AdminGaleriaPage() {
 
   useEffect(() => {
     getDate();
-    console.log("got date");
     if (nextEvent !== "") {
       getPersons();
     }
