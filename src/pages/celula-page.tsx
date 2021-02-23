@@ -73,7 +73,7 @@ function CelulaPage() {
       <main>
         {displayAlert}
         <div className="header">
-          <h2>Confraternização de Natal</h2>
+          <h2>Célula de quinta-feira</h2>
           <h3>{nextEvent}</h3>
         </div>
         <input
